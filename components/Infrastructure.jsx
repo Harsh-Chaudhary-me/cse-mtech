@@ -39,14 +39,15 @@ export default function Infrastructure() {
     <section id="infrastructure" className="py-20 bg-linear-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-2">
-            Infrastructure & Facilities
+        <div className="mb-14 relative w-full">
+          <h2 className="text-[32px] md:text-[40px] font-bold text-[#0f172a] mb-6 tracking-tight text-center">
+            <span className="pb-1" style={{ borderBottom: '3px solid #F26520' }}>
+              Infrastructure & Facilities
+            </span>
+            
           </h2>
-          <div
-            className="w-24 h-1 rounded-full"
-            style={{ backgroundColor: '#F26520' }}
-          ></div>
+          
+        
         </div>
 
         {/* Infrastructure Grid */}

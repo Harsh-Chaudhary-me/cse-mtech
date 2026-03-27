@@ -47,58 +47,20 @@ export default function Publications() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {publicationCategories.map((category) => {
             const Icon = category.icon;
-            const isHovered = hoveredCard === category.id;
 
             return (
               <div
                 key={category.id}
-                onMouseEnter={() => setHoveredCard(category.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-                className={`p-8 rounded-xl transition-all duration-300 cursor-pointer transform ${
-                  isHovered
-                    ? 'shadow-2xl -translate-y-2'
-                    : 'shadow-md border border-gray-200'
-                }`}
-                style={{
-                  backgroundColor: isHovered ? '#F26520' : category.color,
-                }}
+                className="p-8 rounded-xl transition-all duration-300 cursor-pointer shadow-md bg-white border border-gray-200 hover:border-[#F26520] hover:shadow-lg"
               >
-                <div
-                  className={`w-16 h-16 rounded-lg flex items-center justify-center mb-6 transition-all duration-300 transform ${
-                    isHovered ? 'scale-110 rotate-12' : ''
-                  }`}
-                  style={{
-                    backgroundColor: isHovered
-                      ? 'rgba(255, 255, 255, 0.2)'
-                      : '#F26520',
-                  }}
-                >
-                  <Icon
-                    size={32}
-                    className={`transition-colors duration-300 ${
-                      isHovered ? 'text-white' : 'text-white'
-                    }`}
-                  />
-                </div>
-                <div
-                  className={`text-4xl font-bold mb-2 transition-colors duration-300 ${
-                    isHovered ? 'text-white' : 'text-orange-600'
-                  }`}
-                >
+                
+                <div className="text-4xl font-bold mb-2 text-[#F26520]">
                   {category.count}
                 </div>
-                <h3
-                  className={`text-xl font-bold mb-3 transition-colors duration-300 ${
-                    isHovered ? 'text-white' : 'text-gray-900'
-                  }`}
-                >
+                <h3 className="text-xl font-bold mb-3 text-gray-900">
                   {category.title}
                 </h3>
-                <p
-                  className={`transition-colors duration-300 ${
-                    isHovered ? 'text-blue-50' : 'text-gray-700'
-                  }`}
-                >
+                <p className="text-gray-700">
                   {category.description}
                 </p>
               </div>

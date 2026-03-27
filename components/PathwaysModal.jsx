@@ -9,7 +9,6 @@ export default function PathwaysModal({ open, onClose, pathway }) {
         <div 
           className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative animate-slideUp"
           style={{ 
-            borderTop: `6px solid ${pathway.color}`,
             fontFamily: 'inherit'
           }}
         >
