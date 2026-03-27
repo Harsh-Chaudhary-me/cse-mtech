@@ -41,7 +41,7 @@ export default function Placement() {
           {[...logos, ...logos].map((logo, i) => (
             <div
               key={i}
-              className="flex items-center justify-center min-w-[160px] px-6"
+              className="flex items-center justify-center min-w-40 px-6"
             >
               <img
                 src={logo}
