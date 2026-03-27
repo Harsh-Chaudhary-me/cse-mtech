@@ -260,16 +260,13 @@ export default function Faculty() {
       id="faculty"
       className="py-16 bg-linear-to-b from-gray-50 to-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-2">Faculty</h2>
-          <div
-            className="w-16 h-1 rounded-full"
-            style={{ backgroundColor: "#F26520" }}
-          ></div>
-          <p className="mt-4 max-w-3xl text-gray-600">
-            Hover on the email icon to reveal the email address.
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mb-14 relative w-full">
+          <h2 className="text-[32px] md:text-[40px] font-bold text-[#0f172a] mb-6 tracking-tight text-center">
+            <span className="pb-1" style={{ borderBottom: '3px solid #F26520' }}>
+              Faculty
+            </span>
+          </h2>
         </div>
 
         {/* Filter Buttons */}
