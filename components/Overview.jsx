@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { BookOpen, Users, Award, TrendingUp } from 'lucide-react';
+import { BookOpen, Users, Award, TrendingUp, Briefcase, GraduationCap, Rocket } from 'lucide-react';
+import PathwaysModal from './PathwaysModal';
+import { pathwaysData } from '../src/pathwaysData';
 
 export default function Overview() {
   const [imageHovered, setImageHovered] = useState(false);
+  const [selectedPathway, setSelectedPathway] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const buttons = [
     {
@@ -34,6 +38,22 @@ export default function Overview() {
       zIndex: 10,
     },
   ];
+
+  const pathwayIcons = {
+    1: Briefcase,
+    2: GraduationCap,
+    3: Rocket
+  };
+
+  const handlePathwayClick = (pathway) => {
+    setSelectedPathway(pathway);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedPathway(null), 300);
+  };
 
   return (
     <section id="overview" className="py-16 bg-white">
@@ -103,10 +123,8 @@ export default function Overview() {
                 onMouseEnter={() => setImageHovered(true)}
                 onMouseLeave={() => setImageHovered(false)}
               >
-                {/* Subtle gradient behind person to ground the image */}
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-200/60 via-transparent to-transparent pointer-events-none"></div>
 
-                {/* Image Wrapper: Increased size */}
                 <div className="relative pt-10 flex justify-center items-end" style={{ height: '480px' }}> 
                   <img
                     src="../src/assets/images/Dr._Vineet_Sharma_4478-removebg-preview.png"
@@ -123,10 +141,8 @@ export default function Overview() {
                 </div>
               </div>
 
-              {/* Offset Accent Background for subtle depth */}
               <div className="absolute -inset-4 bg-[#164265] rounded-[2rem] -z-10 opacity-[0.03] transform transition-transform duration-500 group-hover:scale-105"></div>
 
-              {/* Classic Name Plate */}
               <div
                 className={`absolute -bottom-6 left-1/2 -translate-x-1/2 w-[85%] rounded-xl p-5 shadow-2xl transition-all duration-500 z-20 ${
                   imageHovered ? 'transform -translate-y-1' : ''
@@ -146,7 +162,7 @@ export default function Overview() {
         </div>
 
         {/* Action Cards Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {buttons.map((button) => {
             const Icon = button.icon;
             const isApplyButton = button.id === 'apply';
@@ -164,7 +180,6 @@ export default function Overview() {
                   isApplyButton ? 'hover:border-[#F26520]/50' : 'hover:border-[#164265]/30'
                 }`}
               >
-                {/* Subtle top border accent on hover */}
                 <div className={`absolute top-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${
                   isApplyButton ? 'bg-[#F26520]' : 'bg-[#164265]'
                 }`}></div>
@@ -205,7 +220,106 @@ export default function Overview() {
             );
           })}
         </div>
+
+        {/* THREE DISTINCT PATHWAYS SECTION */}
+        <div className="mt-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-3 text-gray-900">
+              Three Distinct Pathways. One Unified Excellence.
+            </h3>
+            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+              Choose the pathway that aligns with your career aspirations and professional goals
+            </p>
+            <div className="flex justify-center mt-4">
+              <div
+                className="w-20 h-1 rounded-full"
+                style={{ backgroundColor: '#F26520' }}
+              ></div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {pathwaysData.map((pathway) => {
+              const IconComponent = pathwayIcons[pathway.id];
+              return (
+                <div
+                  key={pathway.id}
+                  onClick={() => handlePathwayClick(pathway)}
+                  className="group relative bg-white rounded-2xl p-6 border-2 border-gray-100 cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+                  style={{
+                    borderTopColor: pathway.color,
+                    borderTopWidth: '4px'
+                  }}
+                >
+                  {/* Icon Circle */}
+                  <div className="mb-5 flex justify-center">
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        backgroundColor: `${pathway.color}15`,
+                        color: pathway.color
+                      }}
+                    >
+                      <IconComponent size={28} strokeWidth={2.2} />
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h4
+                    className="text-xl font-bold mb-3 text-center leading-snug text-gray-900"
+                  >
+                    {pathway.title}
+                  </h4>
+
+                  {/* Subtitle */}
+                  <p className="text-sm font-semibold text-gray-700 text-center mb-4 min-h-[40px]">
+                    {pathway.subtitle}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-600 text-center leading-relaxed mb-6 min-h-[80px]">
+                    {pathway.shortDesc}
+                  </p>
+
+                  {/* View Details Button */}
+                  <div className="flex justify-center">
+                    <button
+                      className="px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 group-hover:shadow-md"
+                      style={{
+                        backgroundColor: `${pathway.color}10`,
+                        color: pathway.color,
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = pathway.color;
+                        e.currentTarget.style.color = 'white';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = `${pathway.color}10`;
+                        e.currentTarget.style.color = pathway.color;
+                      }}
+                    >
+                      View Complete Curriculum →
+                    </button>
+                  </div>
+
+                  {/* Hover Accent Line */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center rounded-b-2xl"
+                    style={{ backgroundColor: pathway.color }}
+                  ></div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
+
+      {/* Pathways Modal */}
+      <PathwaysModal
+        open={isModalOpen}
+        onClose={closeModal}
+        pathway={selectedPathway}
+      />
     </section>
   );
 }
