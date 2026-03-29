@@ -1,197 +1,306 @@
-import React, { useState } from "react";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Star } from "lucide-react";
+
+const TESTIMONIALS = [
+  {
+    id: 1,
+    name: "Aman Kumar",
+    company: "Google",
+    role: "ML Engineer",
+    initials: "AK",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    avatarBg: "#164265",
+    message:
+      "The M.Tech program at KIET provided me with comprehensive knowledge in AI and ML. The hands-on projects and industry mentorship were invaluable in my career growth.",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "Priya Singh",
+    company: "Microsoft",
+    role: "Data Scientist",
+    initials: "PS",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    avatarBg: "#1a5c8a",
+    message:
+      "KIET's DGX supercomputing center gave me access to cutting-edge technology. The faculty guidance and peer learning environment accelerated my professional development significantly.",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Rohit Patel",
+    company: "Amazon",
+    role: "AI Research Scientist",
+    initials: "RP",
+    image: "https://randomuser.me/api/portraits/men/57.jpg",
+    avatarBg: "#0f3d5c",
+    message:
+      "The curriculum is perfectly aligned with industry needs. I appreciated the balance of theoretical knowledge and hands-on applications. The placement support was exceptional.",
+    rating: 5,
+  },
+  {
+    id: 4,
+    name: "Neha Verma",
+    company: "IBM",
+    role: "Senior Developer",
+    initials: "NV",
+    image: "https://randomuser.me/api/portraits/women/26.jpg",
+    avatarBg: "#164265",
+    message:
+      "Outstanding program with experienced faculty and world-class infrastructure. The industry connect sessions helped me understand real-world AI challenges and build practical solutions.",
+    rating: 5,
+  },
+  {
+    id: 5,
+    name: "Arjun Mehta",
+    company: "Flipkart",
+    role: "Software Engineer",
+    initials: "AM",
+    image: "https://randomuser.me/api/portraits/men/15.jpg",
+    avatarBg: "#1a5c8a",
+    message:
+      "The research opportunities and collaboration with industry experts during the M.Tech program gave me a significant advantage. The faculty are genuinely committed educators.",
+    rating: 5,
+  },
+  {
+    id: 6,
+    name: "Divya Sharma",
+    company: "TCS Research",
+    role: "AI Researcher",
+    initials: "DS",
+    image: "https://randomuser.me/api/portraits/women/63.jpg",
+    avatarBg: "#0f3d5c",
+    message:
+      "From state-of-the-art labs to experienced mentors, KIET's M.Tech CSE program exceeded my expectations. The exposure to emerging technologies prepared me comprehensively for the AI industry.",
+    rating: 5,
+  },
+];
+
+const VISIBLE = 3;
+// Extend the array so the carousel can loop seamlessly
+const EXTENDED = [...TESTIMONIALS, ...TESTIMONIALS.slice(0, VISIBLE)];
+
+function TestimonialCard({ testimonial }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        borderRadius: "10px",
+        overflow: "hidden",
+        border: "1px solid #E5E7EB",
+        height: "248px",
+        backgroundColor: "#ffffff",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+      }}
+    >
+      {/* Left — photo panel */}
+      <div
+        style={{
+          width: "36%",
+          flexShrink: 0,
+          position: "relative",
+          overflow: "hidden",
+          backgroundColor: testimonial.avatarBg,
+        }}
+      >
+        <img
+          src={testimonial.image}
+          alt={testimonial.name}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center top",
+            display: "block",
+          }}
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+          }}
+        />
+        {/* Subtle gradient overlay at the bottom edge */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "40%",
+            background: `linear-gradient(to top, ${testimonial.avatarBg}99, transparent)`,
+          }}
+        />
+      </div>
+
+      {/* Right — content panel */}
+      <div
+        style={{
+          flex: 1,
+          padding: "18px 20px",
+          display: "flex",
+          flexDirection: "column",
+          minWidth: 0,
+        }}
+      >
+        {/* Star rating */}
+        <div style={{ display: "flex", gap: "3px", marginBottom: "10px" }}>
+          {Array.from({ length: testimonial.rating }).map((_, i) => (
+            <Star
+              key={i}
+              size={13}
+              className="fill-current"
+              style={{ color: "#F26520" }}
+            />
+          ))}
+        </div>
+
+        {/* Quote */}
+        <p
+          style={{
+            color: "#4B5563",
+            fontSize: "12.5px",
+            lineHeight: "1.7",
+            fontStyle: "italic",
+            flex: 1,
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: 5,
+            WebkitBoxOrient: "vertical",
+            margin: 0,
+          }}
+        >
+          &ldquo;{testimonial.message}&rdquo;
+        </p>
+
+        {/* Divider */}
+        <div
+          style={{
+            height: "1px",
+            backgroundColor: "#F3F4F6",
+            margin: "12px 0 10px",
+          }}
+        />
+
+        {/* Name & designation */}
+        <div>
+          <p
+            style={{
+              fontWeight: "700",
+              color: "#111827",
+              fontSize: "13.5px",
+              margin: "0 0 2px",
+            }}
+          >
+            {testimonial.name}
+          </p>
+          <p
+            style={{
+              color: "#6B7280",
+              fontSize: "12px",
+              margin: 0,
+            }}
+          >
+            {testimonial.role}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
+  const [animated, setAnimated] = useState(true);
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "Aman Kumar",
-      company: "Google",
-      role: "ML Engineer",
-      image: "AK",
-      message:
-        "The M.Tech program at KIET provided me with comprehensive knowledge in AI and ML. The hands-on projects and industry mentorship were invaluable in my career growth. Highly recommended!",
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: "Priya Singh",
-      company: "Microsoft",
-      role: "Data Scientist",
-      image: "PS",
-      message:
-        "KIET's DGX supercomputing center gave me access to cutting-edge technology. The faculty guidance and peer learning environment accelerated my professional development significantly.",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Rohit Patel",
-      company: "Amazon",
-      role: "AI Research Scientist",
-      image: "RP",
-      message:
-        "The curriculum is perfectly aligned with industry needs. I appreciated the mix of theoretical knowledge and practical applications. The placement support was excellent.",
-      rating: 5,
-    },
-    {
-      id: 4,
-      name: "Neha Verma",
-      company: "IBM",
-      role: "Senior Developer",
-      image: "NV",
-      message:
-        "Outstanding program with experienced faculty and world-class infrastructure. The industry connect sessions helped me understand real-world AI challenges and solutions.",
-      rating: 5,
-    },
-  ];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => prev + 1);
+    }, 3800);
+    return () => clearInterval(interval);
+  }, []);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? testimonials.length - 1 : prev - 1,
-    );
-  };
+  // When we reach the cloned segment, snap silently back to the real start
+  useEffect(() => {
+    if (current === TESTIMONIALS.length) {
+      const snap = setTimeout(() => {
+        setAnimated(false);
+        setCurrent(0);
+      }, 620);
+      return () => clearTimeout(snap);
+    }
+  }, [current]);
 
-  const handleNext = () => {
-    setCurrentIndex((prev) =>
-      prev === testimonials.length - 1 ? 0 : prev + 1,
-    );
-  };
+  useEffect(() => {
+    if (!animated) {
+      const restore = setTimeout(() => setAnimated(true), 50);
+      return () => clearTimeout(restore);
+    }
+  }, [animated]);
 
-  const itemsToShow = window.innerWidth >= 1024 ? 2 : 1;
+  const translateX = -(current * (100 / VISIBLE));
+  const activeDot = current % TESTIMONIALS.length;
 
   return (
     <section id="testimonials" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-16">
+        {/* Section header */}
+        <div className="mb-14">
           <h2 className="text-4xl font-bold text-gray-900 mb-2">
             Student Testimonials
           </h2>
           <div
             className="w-24 h-1 rounded-full"
             style={{ backgroundColor: "#F26520" }}
-          ></div>
+          />
         </div>
 
-        {/* Testimonials Carousel */}
-        <div className="relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => {
-              const isVisible =
-                index >= currentIndex && index < currentIndex + itemsToShow;
-
-              return (
-                <div
-                  key={testimonial.id}
-                  className={`transition-all duration-500 ${
-                    isVisible ? "opacity-100 visible" : "opacity-0 invisible"
-                  }`}
-                >
-                  <div className="h-full p-8 rounded-xl border border-gray-200 bg-linear-to-br from-gray-50 to-white hover:shadow-lg transition-all duration-300">
-                    {/* Rating */}
-                    <div className="flex items-center space-x-1 mb-4">
-                      {Array.from({ length: testimonial.rating }).map(
-                        (_, i) => (
-                          <Star
-                            key={i}
-                            size={18}
-                            className="fill-current"
-                            style={{ color: "#F26520" }}
-                          />
-                        ),
-                      )}
-                    </div>
-
-                    {/* Message */}
-                    <p className="text-gray-700 mb-6 leading-relaxed italic">
-                      "{testimonial.message}"
-                    </p>
-
-                    {/* Author */}
-                    <div className="flex items-center space-x-4 pt-6 border-t border-gray-200">
-                      <div
-                        className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                        style={{ backgroundColor: "#164265" }}
-                      >
-                        {testimonial.image}
-                      </div>
-                      <div>
-                        <p className="font-bold text-gray-900">
-                          {testimonial.name}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {testimonial.role} at{" "}
-                          <span style={{ color: "#F26520" }}>
-                            {testimonial.company}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+        {/* Carousel track */}
+        <div style={{ overflow: "hidden" }}>
+          <div
+            style={{
+              display: "flex",
+              transform: `translateX(${translateX}%)`,
+              transition: animated
+                ? "transform 0.62s cubic-bezier(0.4, 0, 0.2, 1)"
+                : "none",
+            }}
+          >
+            {EXTENDED.map((testimonial, i) => (
+              <div
+                key={i}
+                style={{
+                  width: `calc(100% / ${VISIBLE})`,
+                  flexShrink: 0,
+                  padding: "0 10px",
+                  boxSizing: "border-box",
+                }}
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-center space-x-4 mt-12">
-            <button
-              onClick={handlePrev}
-              className="p-3 rounded-full border-2 transition-all duration-300 hover:shadow-lg"
+        {/* Progress indicators */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "8px",
+            marginTop: "36px",
+          }}
+        >
+          {TESTIMONIALS.map((_, i) => (
+            <div
+              key={i}
               style={{
-                borderColor: "#F26520",
-                color: "#F26520",
+                width: i === activeDot ? "28px" : "8px",
+                height: "8px",
+                borderRadius: "4px",
+                backgroundColor: i === activeDot ? "#F26520" : "#D1D5DB",
+                transition: "all 0.35s ease",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#F26520";
-                e.currentTarget.style.color = "white";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-                e.currentTarget.style.color = "#F26520";
-              }}
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            {/* Indicators */}
-            <div className="flex items-center space-x-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    currentIndex === index ? "w-8" : ""
-                  }`}
-                  style={{
-                    backgroundColor:
-                      currentIndex === index ? "#F26520" : "#D1D5DB",
-                  }}
-                ></button>
-              ))}
-            </div>
-
-            <button
-              onClick={handleNext}
-              className="p-3 rounded-full border-2 transition-all duration-300 hover:shadow-lg"
-              style={{
-                borderColor: "#F26520",
-                color: "#F26520",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#F26520";
-                e.currentTarget.style.color = "white";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-                e.currentTarget.style.color = "#F26520";
-              }}
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
+            />
+          ))}
         </div>
       </div>
     </section>
