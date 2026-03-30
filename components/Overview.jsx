@@ -259,24 +259,7 @@ export default function Overview() {
                   key={pathway.id}
                   onClick={() => handlePathwayClick(pathway)}
                   className="group relative bg-white rounded-2xl p-6 border-2 border-gray-100 cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
-                  style={{
-                    borderTopColor: pathway.color,
-                    borderTopWidth: '4px'
-                  }}
                 >
-                  {/* Icon Circle */}
-                  <div className="mb-5 flex justify-center">
-                    <div
-                      className="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                      style={{
-                        backgroundColor: `${pathway.color}15`,
-                        color: pathway.color
-                      }}
-                    >
-                      <IconComponent size={28} strokeWidth={2.2} />
-                    </div>
-                  </div>
-
                   {/* Title */}
                   <h4
                     className="text-xl font-bold mb-3 text-center leading-snug text-gray-900"
@@ -297,18 +280,18 @@ export default function Overview() {
                   {/* View Details Button */}
                   <div className="flex justify-center">
                     <button
-                      className="px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 group-hover:shadow-md"
+                      className="px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 group-hover:shadow-md cursor-pointer"
                       style={{
-                        backgroundColor: `${pathway.color}10`,
-                        color: pathway.color,
+                        backgroundColor: '#164265',
+                        color: 'white',
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = pathway.color;
+                        e.currentTarget.style.backgroundColor = '#0f2c45';
                         e.currentTarget.style.color = 'white';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = `${pathway.color}10`;
-                        e.currentTarget.style.color = pathway.color;
+                        e.currentTarget.style.backgroundColor = '#164265';
+                        e.currentTarget.style.color = 'white';
                       }}
                     >
                       View Complete Curriculum →

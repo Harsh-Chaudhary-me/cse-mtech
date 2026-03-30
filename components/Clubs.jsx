@@ -47,7 +47,7 @@ export default function Clubs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-14 relative w-full">
-          <h2 className="text-[32px] md:text-[40px] font-bold text-[#0f172a] mb-6 tracking-tight">
+          <h2 className="text-[32px] md:text-[40px] font-bold text-[#0f172a] mb-6 tracking-tight text-center">
             <span className="pb-1" style={{ borderBottom: '3px solid #F26520' }}>
               Clubs
             </span>
@@ -137,7 +137,7 @@ export default function Clubs() {
                 {selectedClub.tags.map(tag => (
                  <span 
                    key={tag} 
-                   className="px-3 py-1.5 bg-[#f8fafc] border border-gray-200 text-[#F26520] text-xs font-bold rounded-lg uppercase tracking-wider"
+                   className="px-3 py-1.5 bg-[#f8fafc] border border-gray-200 text-[#164265] text-xs font-bold rounded-lg uppercase tracking-wider"
                  >
                    {tag}
                  </span>
@@ -149,7 +149,7 @@ export default function Clubs() {
               </p>
               
               <button 
-                className="px-10 py-3 bg-[#F26520] hover:bg-[#d95a2c] text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg w-full md:w-auto" 
+                className="px-10 py-3 bg-[#164265] hover:bg-[#d95a2c] text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg w-full md:w-auto" 
                 onClick={() => setSelectedClub(null)}
               >
                 Close

@@ -9,7 +9,6 @@ export default function PathwaysModal({ open, onClose, pathway }) {
         <div 
           className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative animate-slideUp"
           style={{ 
-            borderTop: `6px solid ${pathway.color}`,
             fontFamily: 'inherit'
           }}
         >
@@ -86,7 +85,7 @@ export default function PathwaysModal({ open, onClose, pathway }) {
                         className="flex items-start gap-3 text-gray-800"
                       >
                         <span 
-                          className="mt-1.5 flex-shrink-0 w-2 h-2 rounded-full"
+                          className="mt-1.5 shrink-0 w-2 h-2 rounded-full"
                           style={{ backgroundColor: pathway.color }}
                         ></span>
                         <span className="text-sm leading-relaxed">

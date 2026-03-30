@@ -92,32 +92,29 @@ const facultyMembers = [
   { id: 26, name: "Mr. Anshuman Kalia", designation: "Assistant Professor" },
   { id: 27, name: "Mr. Harsh Modi", designation: "Assistant Professor" },
   { id: 28, name: "Mr. Pavan Sharma", designation: "Assistant Professor" },
-  { id: 29, name: "Ms. Vanshika Gupta", designation: "Assistant Professor" },
-  { id: 30, name: "Ms. Neeti Pahuja", designation: "Assistant Professor" },
+  { id: 29, name: "Ms. Neeti Pahuja", designation: "Assistant Professor" },
   {
-    id: 31,
+    id: 30,
     name: "Mr. Rajanish Kumar Jain",
     designation: "Assistant Professor",
   },
-  { id: 32, name: "Ms. Surbhi Jain", designation: "Assistant Professor" },
-  { id: 33, name: "Ms. Maitree", designation: "Assistant Professor" },
-  { id: 34, name: "Mr. Aman Srivastav", designation: "Assistant Professor" },
-  { id: 35, name: "Mr. Mohit Tanwar", designation: "Assistant Professor" },
-  { id: 36, name: "Mr. Hrjeet Singh", designation: "Assistant Professor" },
-  { id: 37, name: "Mr. Vaibhaw Kori", designation: "Assistant Professor" },
-  { id: 38, name: "Ms. Prabhjot Kaur", designation: "Assistant Professor" },
-  { id: 39, name: "Dr. Nand Kishor Yadav", designation: "Assistant Professor" },
-  { id: 40, name: "Mr. Navdesh Singh", designation: "Assistant Professor" },
+  { id: 31, name: "Ms. Surbhi Jain", designation: "Assistant Professor" },
+  { id: 32, name: "Ms. Maitree", designation: "Assistant Professor" },
+  { id: 33, name: "Mr. Aman Srivastav", designation: "Assistant Professor" },
+  { id: 34, name: "Mr. Mohit Tanwar", designation: "Assistant Professor" },
+  { id: 35, name: "Mr. Hrjeet Singh", designation: "Assistant Professor" },
+  { id: 36, name: "Ms. Prabhjot Kaur", designation: "Assistant Professor" },
+  { id: 37, name: "Dr. Nand Kishor Yadav", designation: "Assistant Professor" },
+  { id: 38, name: "Mr. Navdesh Singh", designation: "Assistant Professor" },
   {
-    id: 41,
+    id: 39,
     name: "Mr. Rishab Singh Rathore",
     designation: "Assistant Professor",
   },
-  { id: 42, name: "Mr. Vaibhav Kumar", designation: "Assistant Professor" },
-  { id: 43, name: "Mr. Anikesh", designation: "Assistant Professor" },
-  { id: 44, name: "Mr. Ravi Tomer", designation: "Assistant Manager" },
-  { id: 45, name: "Mr. Sandeep Kumar", designation: "Officer-IT" },
-  { id: 46, name: "Mr. Jaskirat Singh", designation: "Adjunct Faculty" },
+  { id: 40, name: "Mr. Anikesh", designation: "Assistant Professor" },
+  { id: 41, name: "Mr. Ravi Tomer", designation: "Assistant Manager" },
+  { id: 42, name: "Mr. Sandeep Kumar", designation: "Officer-IT" },
+  { id: 43, name: "Mr. Jaskirat Singh", designation: "Adjunct Faculty" },
 ];
 
 const inferDegree = (name) => (name.startsWith("Dr.") ? "Ph.D." : "");
@@ -276,16 +273,13 @@ export default function Faculty() {
       id="faculty"
       className="py-16 bg-linear-to-b from-gray-50 to-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-2">Faculty</h2>
-          <div
-            className="w-16 h-1 rounded-full"
-            style={{ backgroundColor: "#F26520" }}
-          ></div>
-          <p className="mt-4 max-w-3xl text-gray-600">
-            Hover on the email icon to reveal the email address.
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mb-14 relative w-full">
+          <h2 className="text-[32px] md:text-[40px] font-bold text-[#0f172a] mb-6 tracking-tight text-center">
+            <span className="pb-1" style={{ borderBottom: '3px solid #F26520' }}>
+              Faculty
+            </span>
+          </h2>
         </div>
 
         {/* Filter Buttons */}
